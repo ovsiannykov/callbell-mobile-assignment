@@ -63,8 +63,7 @@ The project includes a skeleton structure for API integration in the `src/api` d
 
 In order to run the expo app locally you'll need:
 
-- nvm
-- direnv
+- nvm (optional)
 - node 20.11.1
 - react 19.1.0
 
