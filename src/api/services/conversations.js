@@ -4,17 +4,7 @@ export const conversationsService = {
    * @returns Promise<Array>
    */
   getConversations: async () => {
-    // To be implemented by the candidate
-    throw new Error("Not implemented");
-  },
-
-  /**
-   * Get a single conversation by ID
-   * @param {string} conversationId
-   * @returns Promise<Object>
-   */
-  getConversation: async (conversationId) => {
-    // To be implemented by the candidate
+    // TODO: Implement this using the API endpoint https://docs.callbell.eu/api/reference/contacts_api/get_contacts
     throw new Error("Not implemented");
   },
 };

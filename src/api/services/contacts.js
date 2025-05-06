@@ -4,8 +4,8 @@ export const contactsService = {
    * @param {string} contactId
    * @returns Promise<Object>
    */
-  getContact: async (contactId) => {
-    // To be implemented by the candidate
+  getContact: async (contactUUID) => {
+    // TODO: Implement this using the API endpoint https://docs.callbell.eu/api/reference/contacts_api/get_contact
     throw new Error("Not implemented");
   },
 
@@ -15,8 +15,8 @@ export const contactsService = {
    * @param {Object} data
    * @returns Promise<Object>
    */
-  updateContact: async (contactId, data) => {
-    // To be implemented by the candidate
+  updateContact: async (contactUUID, data) => {
+    // TODO: Implement this using the API endpoint https://docs.callbell.eu/api/reference/contacts_api/patch_contacts
     throw new Error("Not implemented");
   },
 };
