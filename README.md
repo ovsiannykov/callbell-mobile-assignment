@@ -16,7 +16,6 @@ The application should have three main screens:
 2. **Chat Screen** (`/chat`)
 
    - Display the conversation messages fetched from the Callbell API
-   - Allow sending new text messages using the Callbell API
    - Show conversation history
    - Should have a way to navigate to contact details
 
@@ -25,7 +24,6 @@ The application should have three main screens:
    - Show contact name, notes, and other metadata
    - Should allow contact name update
    - Should have a way to navigate back to conversations
- 
 
 ## Technical Requirements
 
@@ -35,13 +33,14 @@ The application should have three main screens:
 - Handle data management (you can choose any approach: Context API, Redux, etc.)
 - Implement proper error handling
 - Ensure good UX/UI practices
-- Implement test using jest
+- Implement basic tests (we provide you with Jest in the package.json, but feel free to use any tool you prefer)
 
 ## Bonus
 
 If you have time you can go the extra miles and implement the following:
+
 - Allow deleting a conversation/message
-- Make the app real time when receiving a new message.
+- Implement more advanced tests (E2E, snapshots etc)
 
 ## API Integration
 
@@ -102,25 +101,23 @@ nvm use
 
 **4. Install dependencies**
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
+
 **5. Add your Callbell API key to `.envrc`**
 
-Rename `.envrc.example` to `.envrc` and replace the example variable with your proxy url:
+Add the API key we've sent you by email in your ".envrc" file
 
 ```
 export CALLBELL_API_KEY=your_api_key
 ```
 
-To load these env vars, we use the tool `direnv` (feel free to use any tool you prefer to load env variables).
-You can install it using `brew install direnv`, then follow [this](https://direnv.net/docs/hook.html) guide to enable direnv
-
 **6. Start expo server:**
 
-   ```bash
-   npx expo start
-   ```
+```bash
+npx expo start
+```
 
 **4. Open the app on your device or emulator**
 
