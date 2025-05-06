@@ -1,8 +1,30 @@
-# Chat Application Assignment
+# Callbell Mobile Test
 
-This is a coding assignment for developers. The goal is to build a simple chat application with three main screens, integrating with the Callbell API.
+Hi there 👋 Thanks for taking the time to do this test! We hope that you're going to have fun!
 
-## Requirements
+The goal here is to allow you to build an MVP of our Callbell Mobile app.
+
+We'll discuss your work (choices, code syntax, mistakes if there are some, etc.) during a review call after you have completed the assignment.
+
+⚠️ **Carefully read all the instructions, then give yourself a limited time.**
+
+If you struggle to finish it, value your time and don't spend days on it. Just submit your best effort.
+
+⚠️ If you think something is wrong with the test (doesn't run as expected, missing instructions, ...), please email me at [gianluca@callbell.eu](mailto:gianluca@callbell.eu).
+
+## 🚀 Objectives
+
+The goal of this mobile test is to assess your skills on:
+
+- Installing and running an Expo development environment;
+- Making API calls to third-party services;
+- Creating user friendly interface
+- Creating a cross platform app
+- Writing unit tests;
+- Understanding of data management
+- Following instructions and looking for answers in documentations.
+
+## ☑️ Requirements
 
 The application should have three main screens:
 
@@ -25,7 +47,7 @@ The application should have three main screens:
    - Should allow contact name update
    - Should have a way to navigate back to conversations
 
-## Technical Requirements
+## ⚙️ Technical Requirements
 
 - Use React Native with Expo
 - Implement proper navigation between screens
@@ -42,7 +64,7 @@ If you have time you can go the extra miles and implement the following:
 - Allow deleting a conversation/message
 - Implement more advanced tests (E2E, snapshots etc)
 
-## API Integration
+## 🧰 API Integration
 
 The project includes a skeleton structure for API integration in the `src/api` directory for your convenience. But feel free to change it the way you want !
 
@@ -53,13 +75,7 @@ The project includes a skeleton structure for API integration in the `src/api` d
   - `messages.js`: Message-related API calls
   - `contacts.js`: Contact-related API calls
 
-### API Setup
-
-1. Get your Callbell API key from your Callbell dashboard
-2. Add your API key to `src/api/config.js`
-3. Implement the API client and services following the provided structure
-
-## Getting Started
+## 📦 Installing the project
 
 In order to run the expo app locally you'll need:
 
@@ -67,7 +83,7 @@ In order to run the expo app locally you'll need:
 - node 20.11.1
 - react 19.1.0
 
-## Configuration
+### Configuration
 
 You can manage your local npm installation by using `nvm`. Here's instructions on how to get it running:
 
@@ -120,10 +136,23 @@ npx expo start
 
 **4. Open the app on your device or emulator**
 
-## Notes
+## 🗒 Notes
 
 - The current codebase provides only the basic structure and navigation
 - You are free to implement the logic and data management as you see fit
 - Focus on clean code, proper architecture, and good practices
 - Add any necessary dependencies you need
 - Feel free to modify the UI/UX as long as the core functionality remains the same
+
+---
+
+## 📪 Once you're done
+
+Send me an email at [gianluca@callbell.eu](mailto:gianluca@callbell.eu) with subject `[Mobile Test]`, and containing:
+
+- either a link to the GitHub repository of your project (if you want to keep it private, add [@proudlygeek](http://github.com/proudlygeek) as collaborator),
+- **OR** a ZIP **WITHOUT the `node_modules` folder**;
+- **your next availabilities** so I can schedule a review call with you.
+
+**Thanks for participating, have fun!**  
+_Gianluca, CTO at Callbell_
