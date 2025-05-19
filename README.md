@@ -31,7 +31,7 @@ The application should have three main screens:
 1. **Conversations List Screen** (`/`)
 
    - Display a list of conversations fetched from the Callbell API
-   - Each conversation should display the contact name, a contact picture and the last message received
+   - Each conversation should display the contact name, a contact picture
    - Each conversation should be clickable
    - Should navigate to the chat screen when a conversation is selected
 
@@ -122,7 +122,7 @@ npm install
 
 **5. Add your Callbell API key to `.envrc`**
 
-Add the API key we've sent you by email in your ".envrc" file
+Rename `.envrc.example` to `.envrc` and add the API key we've sent you by email.
 
 ```
 export CALLBELL_API_KEY=your_api_key
