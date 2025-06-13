@@ -1,22 +1,34 @@
+import { ApiClient } from "../client";
+
+const apiClient = ApiClient.getInstance();
+
 export const contactsService = {
   /**
    * Get contact details
-   * @param {string} contactId
-   * @returns Promise<Object>
+   * @param {string} contactUUID
+   * @returns {Promise<Object>}
    */
   getContact: async (contactUUID) => {
-    // TODO: Implement this using the API endpoint https://docs.callbell.eu/api/reference/contacts_api/get_contact
-    throw new Error("Not implemented");
+    try {
+      const response = await apiClient.get(`/contacts/${contactUUID}`);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   },
 
   /**
    * Update contact details
-   * @param {string} contactId
+   * @param {string} contactUUID
    * @param {Object} data
-   * @returns Promise<Object>
+   * @returns {Promise<Object>}
    */
   updateContact: async (contactUUID, data) => {
-    // TODO: Implement this using the API endpoint https://docs.callbell.eu/api/reference/contacts_api/patch_contacts
-    throw new Error("Not implemented");
+    try {
+      const response = await apiClient.patch(`/contacts/${contactUUID}`, data);
+      return response;
+    } catch (error) {
+      throw error;
+    }
   },
 };

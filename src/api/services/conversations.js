@@ -1,10 +1,19 @@
+import { ApiClient } from "../client";
+
+const apiClient = ApiClient.getInstance();
+
 export const conversationsService = {
   /**
    * Get list of conversations
-   * @returns Promise<Array>
+   * @returns {Promise<Array>}
    */
   getConversations: async () => {
-    // TODO: Implement this using the API endpoint https://docs.callbell.eu/api/reference/contacts_api/get_contacts
-    throw new Error("Not implemented");
+    try {
+      const response = await apiClient.get("/conversations");
+      return response;
+    } catch (error) {
+      console.error("Failed to fetch conversations", error);
+      throw error;
+    }
   },
 };

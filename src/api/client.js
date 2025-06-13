@@ -11,8 +11,40 @@ export class ApiClient {
   }
 
   async request(endpoint, options = {}) {
-    // TODO: Implement the request method
-    throw new Error("Not implemented");
+    const url = `${this.baseUrl}${endpoint}`;
+
+    const defaultHeaders = {
+      Authorization: `Bearer ${this.apiKey}`,
+      Accept: "application/json",
+    };
+
+    const headers = {
+      ...defaultHeaders,
+      ...options.headers,
+    };
+
+    const response = await fetch(url, {
+      ...options,
+      headers,
+    });
+
+    const contentType = response.headers.get("content-type");
+    let responseBody;
+
+    if (contentType && contentType.includes("application/json")) {
+      responseBody = await response.json();
+    } else {
+      responseBody = await response.text();
+    }
+
+    if (!response.ok) {
+      const error = new Error("API request failed");
+      error.status = response.status;
+      error.body = responseBody;
+      throw error;
+    }
+
+    return responseBody;
   }
 
   async get(endpoint) {
@@ -32,6 +64,16 @@ export class ApiClient {
   async put(endpoint, data) {
     return this.request(endpoint, {
       method: "PUT",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  async patch(endpoint, data) {
+    return this.request(endpoint, {
+      method: "PATCH",
       body: JSON.stringify(data),
       headers: {
         "Content-Type": "application/json",
