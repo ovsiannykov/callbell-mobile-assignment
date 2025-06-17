@@ -23,28 +23,34 @@ export class ApiClient {
       ...options.headers,
     };
 
-    const response = await fetch(url, {
-      ...options,
-      headers,
-    });
+    try {
+      const response = await fetch(url, {
+        ...options,
+        headers,
+      });
 
-    const contentType = response.headers.get("content-type");
-    let responseBody;
+      const contentType = response.headers.get("content-type");
+      let responseBody;
 
-    if (contentType && contentType.includes("application/json")) {
-      responseBody = await response.json();
-    } else {
-      responseBody = await response.text();
-    }
+      if (contentType && contentType.includes("application/json")) {
+        responseBody = await response.json();
+      } else {
+        responseBody = await response.text();
+      }
 
-    if (!response.ok) {
-      const error = new Error("API request failed");
-      error.status = response.status;
-      error.body = responseBody;
+      if (!response.ok) {
+        console.error("API Error response:", response.status, responseBody);
+        const error = new Error("API request failed");
+        error.status = response.status;
+        error.body = responseBody;
+        throw error;
+      }
+
+      return responseBody;
+    } catch (error) {
+      console.error("API Request failed:", error);
       throw error;
     }
-
-    return responseBody;
   }
 
   async get(endpoint) {
