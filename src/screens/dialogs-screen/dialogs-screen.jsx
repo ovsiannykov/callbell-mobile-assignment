@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import { useCallback, useEffect } from "react";
 import { Alert, FlatList, Text, View } from "react-native";
 import { useDialogsStore } from "../../store/dialogs-store";
-import { DialogItem } from "../components/dialog-item/dialog-item";
+import { DialogItem } from "./components/dialog-item/dialog-item";
 import styles from "./dialogs-screen.styles";
 
 const DialogsScreen = () => {
   const { dialogs, loading, fetchDialogs, hasMore, error } = useDialogsStore();
-  const navigation = useNavigation();
+  const router = useRouter();
 
   useEffect(() => {
     fetchDialogs(false);
@@ -21,7 +21,7 @@ const DialogsScreen = () => {
   }, [error]);
 
   const handleSelect = useCallback((contactUUID) => {
-    navigation.navigate("Chat", { contactUUID });
+    router.push({ pathname: "/contact", params: { contactUUID } });
   }, []);
 
   const keyExtractor = useCallback((item) => item.uuid, []);
@@ -41,13 +41,11 @@ const DialogsScreen = () => {
     fetchDialogs(false);
   }, [fetchDialogs]);
 
-  const renderEmptyComponent = () => {
-    return (
-      <View style={styles.emptyScreen}>
-        <Text style={styles.emptyText}>There is nothing here yet</Text>
-      </View>
-    );
-  };
+  const renderEmptyComponent = () => (
+    <View style={styles.emptyScreen}>
+      <Text style={styles.emptyText}>There is nothing here yet</Text>
+    </View>
+  );
 
   return (
     <View style={styles.screen}>
