@@ -1,15 +1,18 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, ScrollView, Text, View } from "react-native";
+import { Alert, ScrollView, Text, View, ActivityIndicator } from "react-native";
 
 import { contactsService } from "../../api/services/contacts";
+import { COLORS } from "../../constants/colors";
 import styles from "./contact-screen.styles";
 
 export const ContactScreen = ({ id }) => {
   const router = useRouter();
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const getContactData = async () => {
+    setLoading(true);
     try {
       const data = await contactsService.getContact(id);
 
@@ -21,6 +24,8 @@ export const ContactScreen = ({ id }) => {
     } catch {
       Alert.alert("Error", "Failed to fetch contact data");
       router.back();
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -29,7 +34,13 @@ export const ContactScreen = ({ id }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(user?.avatarUrl);
+  if (loading) {
+    return (
+      <View style={styles.loadingScreen}>
+        <ActivityIndicator size="large" color={COLORS.light.icon} />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.screen}>

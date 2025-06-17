@@ -30,4 +30,11 @@ export default StyleSheet.create({
     marginBottom: 14,
     fontWeight: "300",
   },
+  loadingScreen: {
+    flex: 1,
+    backgroundColor: COLORS.light.background,
+    paddingHorizontal: 16,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
