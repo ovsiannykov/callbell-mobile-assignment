@@ -1,18 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigation } from "@react-navigation/native";
 import { useCallback, useEffect } from "react";
-import { FlatList, Text, View } from "react-native";
+import { Alert, FlatList, Text, View } from "react-native";
 import { useDialogsStore } from "../../store/dialogs-store";
 import { DialogItem } from "../components/dialog-item/dialog-item";
 import styles from "./dialogs-screen.styles";
 
 const DialogsScreen = () => {
-  const { dialogs, loading, fetchDialogs, hasMore } = useDialogsStore();
+  const { dialogs, loading, fetchDialogs, hasMore, error } = useDialogsStore();
   const navigation = useNavigation();
 
   useEffect(() => {
     fetchDialogs(false);
   }, []);
+
+  useEffect(() => {
+    if (typeof error === "string" && error.length > 0) {
+      Alert.alert("Error", error);
+    }
+  }, [error]);
 
   const handleSelect = useCallback((contactUUID) => {
     navigation.navigate("Chat", { contactUUID });
