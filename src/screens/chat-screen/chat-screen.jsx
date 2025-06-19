@@ -7,6 +7,7 @@ import { messagesService } from "../../api/services/messages";
 import { EmptyContent } from "../../components/empty-content/empty-content";
 import styles from "./chat-screen.styles";
 import { ChatItem } from "./components/chat-item/chat-item";
+import { UserInfo } from "./components/user-info/user-info";
 
 export const ChatScreen = ({ id }) => {
   const router = useRouter();
@@ -80,6 +81,7 @@ export const ChatScreen = ({ id }) => {
         onRefresh={() => getDataHandler(true)}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={<EmptyContent />}
+        ListHeaderComponent={<UserInfo user={user} />}
         style={styles.list}
       />
     </View>
