@@ -73,6 +73,7 @@ export const ChatScreen = ({ id }) => {
   return (
     <View style={styles.screen}>
       <FlatList
+        testID="flatlist"
         data={messages}
         keyExtractor={keyExtractor}
         renderItem={renderItem}

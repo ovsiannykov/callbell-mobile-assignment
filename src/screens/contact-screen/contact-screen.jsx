@@ -37,7 +37,11 @@ export const ContactScreen = ({ id }) => {
   if (loading) {
     return (
       <View style={styles.loadingScreen}>
-        <ActivityIndicator size="large" color={COLORS.light.icon} />
+        <ActivityIndicator
+          testID="loading-indicator"
+          size="large"
+          color={COLORS.light.icon}
+        />
       </View>
     );
   }
