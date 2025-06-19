@@ -13,10 +13,22 @@ jest.mock("expo-router", () => ({
 jest.mock("../../api/services/contacts");
 jest.mock("../../api/services/messages");
 
+const resetMock = jest.fn();
+const fetchChatDataMock = jest.fn();
+const clearErrorMock = jest.fn();
+
+jest.mock("../../store/chat-store/chat-store", () => {
+  return {
+    useChatStore: jest.fn(),
+  };
+});
+
 jest.spyOn(Alert, "alert").mockImplementation(jest.fn());
 
 describe("ChatScreen", () => {
   const back = jest.fn();
+  const useChatStore =
+    require("../../store/chat-store/chat-store").useChatStore;
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -26,15 +38,21 @@ describe("ChatScreen", () => {
   it("renders loading indicator initially", () => {
     contactsService.getContact.mockReturnValue(new Promise(() => {}));
 
+    useChatStore.mockReturnValue({
+      user: { uuid: "contact-uuid", name: "John Doe" },
+      messages: [],
+      loading: true,
+      error: null,
+      fetchChatData: fetchChatDataMock,
+      clearError: clearErrorMock,
+      reset: resetMock,
+    });
+
     const { getByTestId } = render(<ChatScreen id="123" />);
     expect(getByTestId("flatlist")).toBeTruthy();
   });
 
   it("fetches and displays chat data", async () => {
-    const contact = {
-      uuid: "contact-uuid",
-      name: "John Doe",
-    };
     const messages = [
       {
         uuid: "msg-1",
@@ -52,8 +70,20 @@ describe("ChatScreen", () => {
       },
     ];
 
-    contactsService.getContact.mockResolvedValue({ contact });
+    contactsService.getContact.mockResolvedValue({
+      contact: { uuid: "contact-uuid", name: "John Doe" },
+    });
     messagesService.getMessages.mockResolvedValue({ messages });
+
+    useChatStore.mockReturnValue({
+      user: { uuid: "contact-uuid", name: "John Doe" },
+      messages,
+      loading: false,
+      error: null,
+      fetchChatData: fetchChatDataMock,
+      clearError: clearErrorMock,
+      reset: resetMock,
+    });
 
     const { getAllByText, getByText } = render(<ChatScreen id="123" />);
 
@@ -69,6 +99,16 @@ describe("ChatScreen", () => {
     contactsService.getContact.mockRejectedValue(new Error("Fail"));
     messagesService.getMessages.mockResolvedValue({ messages: [] });
 
+    useChatStore.mockReturnValue({
+      user: null,
+      messages: [],
+      loading: false,
+      error: "fail",
+      fetchChatData: fetchChatDataMock,
+      clearError: clearErrorMock,
+      reset: resetMock,
+    });
+
     render(<ChatScreen id="123" />);
 
     await waitFor(() => {
@@ -81,19 +121,45 @@ describe("ChatScreen", () => {
   });
 
   it("calls getDataHandler on pull to refresh", async () => {
-    const contact = { uuid: "contact-uuid", name: "John Doe" };
-    const messages = [];
-    contactsService.getContact.mockResolvedValue({ contact });
-    messagesService.getMessages.mockResolvedValue({ messages });
+    contactsService.getContact.mockResolvedValue({
+      contact: { uuid: "contact-uuid", name: "John Doe" },
+    });
+    messagesService.getMessages.mockResolvedValue({ messages: [] });
+
+    useChatStore.mockReturnValue({
+      user: { uuid: "contact-uuid", name: "John Doe" },
+      messages: [],
+      loading: false,
+      error: null,
+      fetchChatData: fetchChatDataMock,
+      clearError: clearErrorMock,
+      reset: resetMock,
+    });
 
     const { getByTestId } = render(<ChatScreen id="123" />);
 
-    await waitFor(() => expect(contactsService.getContact).toHaveBeenCalled());
+    await waitFor(() => expect(fetchChatDataMock).toHaveBeenCalled());
 
     fireEvent(getByTestId("flatlist"), "refresh");
 
     await waitFor(() => {
-      expect(contactsService.getContact).toHaveBeenCalledTimes(2);
+      expect(fetchChatDataMock).toHaveBeenCalledTimes(2);
     });
+  });
+
+  it("calls reset on unmount to clear store", () => {
+    useChatStore.mockReturnValue({
+      user: { uuid: "contact-uuid", name: "John Doe" },
+      messages: [],
+      loading: false,
+      error: null,
+      fetchChatData: fetchChatDataMock,
+      clearError: clearErrorMock,
+      reset: resetMock,
+    });
+
+    const { unmount } = render(<ChatScreen id="123" />);
+    unmount();
+    expect(resetMock).toHaveBeenCalled();
   });
 });

@@ -1,7 +1,7 @@
 import { fireEvent, render } from "@testing-library/react-native";
 import { useRouter } from "expo-router";
 import { Alert } from "react-native";
-import { useDialogsStore } from "../../store/dialogs-store";
+import { useDialogsStore } from "../../store/dialogs-store/dialogs-store";
 import DialogsScreen from "./dialogs-screen";
 
 jest.mock("expo-router", () => ({

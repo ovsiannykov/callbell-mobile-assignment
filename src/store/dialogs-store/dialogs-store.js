@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { conversationsService } from "../api/services/conversations";
+import { conversationsService } from "../../api/services/conversations";
 
 export const useDialogsStore = create()(
   devtools(

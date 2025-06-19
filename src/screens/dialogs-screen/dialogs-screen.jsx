@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { useCallback, useEffect } from "react";
 import { Alert, FlatList, View } from "react-native";
 import { EmptyContent } from "../../components/empty-content/empty-content";
-import { useDialogsStore } from "../../store/dialogs-store";
+import { useDialogsStore } from "../../store/dialogs-store/dialogs-store";
 import { DialogItem } from "./components/dialog-item/dialog-item";
 import styles from "./dialogs-screen.styles";
 

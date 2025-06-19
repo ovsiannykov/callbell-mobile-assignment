@@ -26,7 +26,7 @@ describe("ContactScreen", () => {
   });
 
   it("renders loading indicator initially", () => {
-    contactsService.getContact.mockReturnValue(new Promise(() => {})); // Promise that never resolves
+    contactsService.getContact.mockReturnValue(new Promise(() => {}));
     const { getByTestId } = render(<ContactScreen id="123" />);
     expect(getByTestId("loading-indicator")).toBeTruthy();
   });
