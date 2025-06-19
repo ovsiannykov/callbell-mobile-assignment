@@ -1,7 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useRouter } from "expo-router";
 import { useCallback, useEffect } from "react";
-import { Alert, FlatList, Text, View } from "react-native";
+import { Alert, FlatList, View } from "react-native";
+import { EmptyContent } from "../../components/empty-content/empty-content";
 import { useDialogsStore } from "../../store/dialogs-store";
 import { DialogItem } from "./components/dialog-item/dialog-item";
 import styles from "./dialogs-screen.styles";
@@ -21,7 +22,7 @@ const DialogsScreen = () => {
   }, [error]);
 
   const handleSelect = useCallback((contactUUID) => {
-    router.push({ pathname: "/contact", params: { contactUUID } });
+    router.push({ pathname: "/chat", params: { contactUUID } });
   }, []);
 
   const keyExtractor = useCallback((item) => item.uuid, []);
@@ -41,12 +42,6 @@ const DialogsScreen = () => {
     fetchDialogs(false);
   }, [fetchDialogs]);
 
-  const renderEmptyComponent = () => (
-    <View style={styles.emptyScreen}>
-      <Text style={styles.emptyText}>There is nothing here yet</Text>
-    </View>
-  );
-
   return (
     <View style={styles.screen}>
       <FlatList
@@ -58,7 +53,7 @@ const DialogsScreen = () => {
         onEndReachedThreshold={0.4}
         refreshing={loading}
         onRefresh={handleRefresh}
-        ListEmptyComponent={renderEmptyComponent}
+        ListEmptyComponent={<EmptyContent />}
       />
     </View>
   );

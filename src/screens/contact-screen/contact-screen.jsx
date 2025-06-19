@@ -1,6 +1,6 @@
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, ScrollView, Text, View, ActivityIndicator } from "react-native";
+import { ActivityIndicator, Alert, ScrollView, Text, View } from "react-native";
 
 import { contactsService } from "../../api/services/contacts";
 import { COLORS } from "../../constants/colors";
