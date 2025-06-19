@@ -10,7 +10,11 @@ const DialogItemComponent = ({ item, onClick }) => {
   };
 
   return (
-    <TouchableOpacity style={styles.item} onPress={handleClick}>
+    <TouchableOpacity
+      testID={`dialog-${item.uuid}`}
+      style={styles.item}
+      onPress={handleClick}
+    >
       <Text style={styles.contactName}>{item.name}</Text>
     </TouchableOpacity>
   );

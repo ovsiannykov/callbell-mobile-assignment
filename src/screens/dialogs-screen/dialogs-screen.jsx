@@ -45,6 +45,7 @@ const DialogsScreen = () => {
   return (
     <View style={styles.screen}>
       <FlatList
+        testID="flat-list"
         data={dialogs}
         keyExtractor={keyExtractor}
         renderItem={renderItem}
